@@ -1,2 +1,2 @@
 # WebApp
-A simplw web app as a Website to have always the latest news
+A simple web app as a Website to have always the latest news
