@@ -1,0 +1,47 @@
+{%  extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/footer.css">
+{% endblock %}
+
+{% block body %}
+<footer class="section footer-classic context-dark bg-image" style="background: #2d3246;">
+    <div class="container">
+        <div class="row row-30">
+            <div class="col-md-4 col-xl-5">
+                <div class="pr-xl-4">
+                    <h5>Logo</h5>
+                    <!-- Rights-->
+                    <p class="rights"><span>{{ footerText }}<br><br>&copy;</span><span class="copyright-year">2018</span><span> </span><span>. </span><span>Tous droits réservés.</span></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h5>Contacts</h5>
+                <dl class="contact-list">
+                    <dt>Adresse:</dt>
+                    <dd>35394, Gießen</dd>
+                </dl>
+                <dl class="contact-list">
+                    <dt>email:</dt>
+                    <dd><a href="mailto:mauricejuniorimele@yahoo.fr">mauricejuniorimele@yahoo.fr</a></dd>
+                </dl>
+                <dl class="contact-list">
+                    <dt>téléphone:</dt>
+                    <dd><a href="tel:#">+49 17622865830</a>
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4 col-xl-3">
+                <h5>Liens</h5>
+                <ul class="nav-list">
+                    <li><a href="#">A propos de moi</a></li>
+                    <li><a href="#">Projets</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacts</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% include 'security/loginFooter.html.twig' %}
+</footer>
+{% endblock %}
