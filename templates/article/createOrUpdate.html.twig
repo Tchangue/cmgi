@@ -5,17 +5,18 @@
     <div class="container">
         <h2>
             {% if editMode %}
-                Modification de l'article {{ article.title }}
+                Modification de l'article <i><br><small>" {{ article.title }} "</small></i>
             {% else %}
                 Cr&eacute;ation d'un article
             {% endif %}
         </h2>
-        {{ form_start(formArticle) }}
-        {{ form_row(formArticle.title, {'attr': {'placeholder':"Titre de l'article"}}) }}
+        {{ form_start(formArticle, {'attr' : {'style':'margin-top:5%'}}) }}
+        {{ form_row(formArticle.title, { 'attr': {'placeholder':"Titre de l'article"} }) }}
         {{ form_row(formArticle.content,{'attr': {'placeholder':"Contenu de l'article"}}) }}
         {{ form_row(formArticle.image,{'attr': {'placeholder':"URL de l'image"}}) }}
         {{ form_row(formArticle.author,{'attr': {'placeholder':"John Doe"}}) }}
         {{ form_row(formArticle.category,{'attr': {'placeholder':"Sans categorie"}}) }}
+        {{ form_row(formArticle.family) }}
 
         <button class="btn btn-success" type="submit">
             {% if editMode %}

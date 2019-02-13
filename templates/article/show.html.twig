@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/articleListView.css">
+    <link rel="stylesheet" href="/css/calender.css">
+{% endblock %}
+
+{% block body %}
+    {% include 'baseNavbar.html.twig' %}
+
+    {% include 'baseGridLayoutOpen.html.twig' %}
+    <br>
+
+    <h2>{{ article.title }}</h2>
+    <div>
+        <img class="rounded" src="{{ article.image }}"/>
+    </div>
+    <div class="metadata">
+        <span><b class="badge badge-secondary">Auteur : </b> {{ article.author }}</span><br>
+        <span><b class="badge badge-secondary">Publi&eacute; le : </b> </b>{{ article.createdAt | date('d/m/Y') }}
+            &agrave; {{ article.createdAt | date('H:i') }}</span><br>
+        <span><b class="badge badge-secondary">Cat&eacute;gorie : </b> {{ article.category }}</span><br>
+        <span><b class="badge badge-secondary">Cat&eacute;gorie parent: </b> {{ article.family.title }}</span><br><br>
+    </div>
+    <div>
+        <p>
+            {{ article.content | raw }}
+        </p>
+    </div>
+    {% if app.user %}
+        <span>
+                <a href="{{ path('article_update',{'title': article.title}) }}">
+                 <button class="btn btn-primary" type="submit">Modifier l'article</button>
+                </a>
+            </span>
+
+    {% endif %}
+    </div>
+
+    {% include 'baseWidget.html.twig' %}
+
+    <br><br><br><br>
+    <section id="comments">
+        <h3 class>{{ article.comments | length }} Commentaires</h3>
+        {% for comment in article.comments %}
+            <div class="comment">
+                <div class="row">
+                    <div class="col-auto">
+                        <img style="border-radius:50%; max-width: 50px; max-height:50px;" src="../images/myAvatar2.png"/>
+                    </div>
+                    <div class="col-2" style="width:5%;">
+                        {{ comment.author }}
+                        <br><small>{{ comment.createdAt | date('d/m/Y')}} &agrave; {{ comment.createdAt | date('H:i') }}</small>
+
+                    </div>
+                    <div class="col-6">
+                        {{ comment.content | raw }}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <br><br><br><br><br>
+
+        {% if app.user %}
+
+            {{ form_start(commentForm) }}
+            {{ form_row(commentForm.author, {'label':"Nom",'attr':{'placeholder':"Nom"}}) }}
+            {{ form_row(commentForm.content, {'label':"Commentaire",'attr':{'placeholder':"Commentaire"}}) }}
+            <a href="">
+                <button class="btn btn-outline-success" type="submit">Laissez un commentaire</button>
+            </a>
+            {{ form_end(commentForm) }}
+
+        {% else %}
+            <h4>Vous ne pouvez pas commenter si vous n'etes pas connecte!</h4>
+            <a href="{{ path('security_login') }}" class="btn btn-outline-primary">Connexion</a>
+        {% endif %}
+    </section>
+    </div>
+    </div>
+    {% include 'baseFooter.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/socialsIconToggle.js"></script>
+    <script src="/js/calender.js"></script>
+{% endblock %}

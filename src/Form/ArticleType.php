@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Form;
+use App\Entity\Group;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
@@ -14,10 +17,14 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('createdAt')
             ->add('image')
             ->add('category')
+	        ->add('family',EntityType::class,[
+	        	'class' => Group::class,
+		        'choice_label' => 'title'
+	        ])
             ->add('author')
+
         ;
     }
 

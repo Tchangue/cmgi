@@ -1,34 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block title %}{{ title }}!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/articleListView.css">
+{% endblock %}
 
 {% block body %}
-    <div class="container">
+    {% include 'baseNavbar.html.twig' %}
+    <!-- <p>Vous n'etes pas connecte!!!</p> -->
+    {% include 'baseGridLayoutOpen.html.twig' %}
+    {% for article in articles %}
         <br>
-        <h2>Titre de l'article 1</h2>
+        <h2 id="postTitle">{{ article.title }}</h2>
         <div>
-            <img src="https://via.placeholder.com/350x150"/>
+            <img src="{{ article.image }}" style="width: auto;height: auto;"/>
         </div>
-        <span><b>Auteur :</b> Junior</span><br>
-        <span><b>Publi&eacute; :</b> 10.09.2018</span><br>
-        <span><b>Cat&eacute;gorie :</b> Politique</span><br>
-        <div>
+        <div class="metadata">
+            <span><b class="badge badge-secondary"><i class=" fas fa-user fw"></i>   Auteur: </b> <small><b>{{ article.author }}</b></small></span><br>
+            <b class="badge badge-secondary">
+                    <i class="far fa-calendar-alt"></i>   Publie le: </b>
+                 <small><b>{{ article.createdAt | date('d-m-Y') }}
+                         &agrave; {{ article.createdAt | date('H:i') }}</b></small></span><br>
+            <span><b class="badge badge-secondary">Cat&eacute;gorie : </b> <small><b>{{ article.category }}</b></small></span><br><br>
+            <div>
+            </div>
             <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                {{ article.content | raw }}
             </p>
+            <a href="{{ path('article_show',{'title': article.title}) }}">
+                <button type="button" class="btn btn-outline-primary">Lire la suite...</button>
+            </a>
         </div>
         <br><br>
-        <h2>Titre de l'article 2</h2>
-        <div>
-            <img src="https://via.placeholder.com/350x150"/>
-        </div>
-        <span><b>Auteur :</b> Junior</span><br>
-        <span><b>Publi&eacute; :</b> 10.09.2018</span><br>
-        <span><b>Cat&eacute;gorie :</b> Sant&eacute;</span><br>
-        <div>
-            <p>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-            </p>
-        </div>
-    </div>
+    {% endfor %}
+    {% include 'baseGridLayoutClose.html.twig' %}
+    {% include 'baseFooter.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/js/socialsIconToggle.js"></script>
+    <script src="/js/calender.js"></script>
+    <script></script>
 {% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/articleListView.css">
+    <link rel="stylesheet" href="/css/calender.css">
+{% endblock %}
+
+{% block body %}
+    <div class="col-sm-4 offset-sm-1 blog-sidebar" style="margin-top:100px">
+        {% for widget in widgets %}
+            <div class="card">
+                <div class="card-header">
+                    <strong>{{ widget.title }}</strong>
+                </div>
+                <div class="card-body primary">
+                    <p class="card-text">
+                        {% if  widget.title == "Citation aléatoire" %}
+                    <blockquote class="quote" id="quote">
+                        {{ quotes | first.content }}<br>
+                        <small><span style="float:right;"><b><i>__ {{ quotes| first.author }}</i></b></span>
+                        </small>
+                        <br>
+                        <div>
+                            <a href="" style="text-decoration: none" id="nextQuote">Citation suivante &raquo;</a>
+                        </div>
+                    </blockquote>
+                    {% elseif widget.title == "Calendrier" %}
+                        <div class="calendar calendar-first" id="calendar_first">
+                            <div class="calendar_header">
+                                <button class="switch-month switch-left"><i class="fa fa-chevron-left"></i>
+                                </button>
+                                <h2 id="currentMonth"><strong></strong></h2>
+                                <button class="switch-month switch-right"><i class="fa fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar_weekdays"></div>
+                            <div class="calendar_content"></div>
+                        </div>
+                    {% elseif widget.title == "Suivez-moi..." %}
+                        <div class="row">
+                            <a href="#" target="_blank">
+                                <div class="col" data-toggle="tooltip" data-placement="bottom"
+                                     title="Visitez mon profil facebook"><i class="fab fa-facebook fa-3x"></i>
+                                </div>
+                            </a>
+                            <a href="#" target="_blank" target="_blank">
+                                <div class="col" data-placement="bottom" data-toggle="tooltip"
+                                     title="Visitez mon profil instagram"><i class="fab fa-instagram fa-3x"></i>
+                                </div>
+                            </a>
+                            <a href="{{ youtubeChannel }}" target="_blank">
+                                <div class="col" data-placement="bottom" data-toggle="tooltip"
+                                     title="Visitez ma chaine youtube"><i class="fab fa-youtube fa-3x"></i>
+                                </div>
+                            </a>
+                            <a href="#" target="_blank">
+                                <div class="col" data-placement="bottom" data-toggle="tooltip"
+                                     title="Visitez mon profil snapchat"><i class="fab fa-snapchat fa-3x"></i>
+                                </div>
+                            </a>
+                            <a href="{{ twitterProfile }}" target="_blank">
+                                <div class="col" data-placement="bottom" data-toggle="tooltip"
+                                     title="Visitez mon profil twitter"><i class="fab fa-twitter fa-3x"></i>
+                                </div>
+                            </a>
+                        </div>
+                    {% elseif widget.title == "Catégories" %}
+                        {% for article in articles %}
+                            <li>
+                                <ul>{{ article.category }}</ul>
+                            </li>
+                        {% endfor %}
+                    {% else %}
+                        With supporting text below as a natural lead-in to additional content.
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    <script type="text/javascript" src="js/quotes.js"></script>
+{% endblock %}
